@@ -1,0 +1,118 @@
+/* ------------- Live Chat Page --------------- */
+
+#chat-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+#header-line {
+  border-bottom: 1px solid #dddddd;
+  min-width: 25%;
+  max-width: 30%;
+}
+#chat-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  border: 2px solid #dddddd;
+  border-radius: 15px;
+  background-color: #eeeeee;
+  box-shadow: #dddddd 0px 6px 16px 0px;
+  padding: 24px;
+  min-width: 400px;
+  max-width: 800px;
+  height: 550px;
+}
+#chat-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 90%;
+  width: 90%;
+  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+#input-and-btn-wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+}
+#send-chat-btn {
+  min-width: 70px !important;
+}
+#chat-input {
+  width: 90%;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid #dddddd;
+}
+#send-chat-btn {
+  width: 10%;
+}
+#user-chat-blurb-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 15%;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+  background-color: #dddddd;
+}
+#text-and-username-row {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  justify-content: right;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+#user-message {
+  color: #636363;
+}
+#user-name,
+#user-message {
+  font-size: 19px;
+}
+#user-time-stamp {
+  font-size: 11px;
+  color: #afafaf;
+  text-align: right;
+  margin-right: 10px;
+  margin-top: -18px;
+}
+#recipient-chat-blurb-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 15%;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+  background-color: #eeeeee;
+}
+#text-and-recipientname-row {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  justify-content: left;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+#recipient-message {
+  color: #636363;
+}
+#recipient-name,
+#recipient-message {
+  font-size: 19px;
+}
+#recipient-time-stamp {
+  font-size: 11px;
+  color: #afafaf;
+  text-align: left;
+  margin-left: 10px;
+  margin-top: -18px;
+}
