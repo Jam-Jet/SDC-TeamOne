@@ -1,5 +1,5 @@
 import UserChatBlurb from "./UserChatBlurb";
-import RecipientChatBlurb from "./RecipientCharBlurb";
+import RecipientChatBlurb from "./RecipientChatBlurb";
 import Button from "react-bootstrap/Button";
 
 const LiveChatPage = () => {
@@ -8,7 +8,7 @@ const LiveChatPage = () => {
       <main>
         <div id="chat-header">
           <div id="header-line"></div>
-          <h1>Start Chatting</h1>
+          <span id="header-text">Start Chatting</span>
           <div id="header-line"></div>
         </div>
         <div id="chat-wrapper">
