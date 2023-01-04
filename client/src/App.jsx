@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import NavBar from "./components/live-chat-page/Navbar";
 import LiveChatPage from "./components/live-chat-page/LiveChatPage";
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
   return (
     <appContext.Provider value={{ ...contextData }}>
       <div className="App">
+        <NavBar />
         <LiveChatPage />
       </div>
     </appContext.Provider>
