@@ -4,7 +4,8 @@ import { useContext } from "react";
 import { appContext } from "../../App";
 
 const UsernameModal = () => {
-  const { showUsernameModal, setShowUsernameModal } = useContext(appContext);
+  const { showUsernameModal, setShowUsernameModal, setCurrentUsername } =
+    useContext(appContext);
   const handleHide = () => {
     setShowUsernameModal(false);
   };
@@ -13,8 +14,9 @@ const UsernameModal = () => {
     <Modal
       show={showUsernameModal}
       onHide={handleHide}
-      size="lg"
       aria-labelledby="contained-modal-title-vcenter"
+      backdrop="static"
+      animation
       centered
     >
       <Modal.Header closeButton>

@@ -2,14 +2,19 @@ import React, { useState, useEffect, useContext } from "react";
 import NavBar from "./components/live-chat-page/Navbar";
 import LiveChatPage from "./components/live-chat-page/LiveChatPage";
 import UsernameModal from "./components/live-chat-page/UsernameModal";
-import Login from "./components/live-chat-page/Login";
-import NavBarLogin from "./components/live-chat-page/NavbarLogin";
-
+import Login from "./components/log-in-page/Login";
+import NavBarLogin from "./components/log-in-page/NavbarLogin";
 
 function App() {
+  const [continueAsGuest, setContinueAsGuest] = useState(false);
+  const [currentUsername, setCurrentUsername] = useState("");
   const [showUsernameModal, setShowUsernameModal] = useState(true);
   const [chatData, setChatData] = useState();
   const contextData = {
+    continueAsGuest,
+    setContinueAsGuest,
+    currentUsername,
+    setCurrentUsername,
     showUsernameModal,
     setShowUsernameModal,
     chatData,
@@ -19,13 +24,7 @@ function App() {
   return (
     <appContext.Provider value={{ ...contextData }}>
       <div className="App">
-        <UsernameModal />
-        <NavBar />
-        <LiveChatPage />
-        {/* <NavBar /> 
-        <LiveChatPage /> */}
-        <NavBarLogin />
-        <Login />
+        {continueAsGuest ? <LiveChatPage /> : <Login />}
       </div>
     </appContext.Provider>
   );
