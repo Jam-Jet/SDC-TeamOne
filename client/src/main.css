@@ -247,10 +247,17 @@ main {
 #login-login:hover{
   background-color: #353a41;
 }
+.login-create{
+  display: flex;
+  margin-top: 20px;
+ 
+}
 .login-a-create{
   color: #636363;
+  margin-right: 10px;
 }
-.login-create{
-  margin-top: 20px;
+.login-a-guest{
+  color: #636363;
+  margin-left: 10px;
 }
 /* --------------------------------------------------------- */

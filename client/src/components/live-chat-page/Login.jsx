@@ -27,7 +27,12 @@ const Login = () => {
             </div>
             <Button id="login-login">LOGIN</Button>
             <div className="login-create">
-                <a className="login-a-create" href="">Create Account</a>
+                <div >
+                    <a className="login-a-create" href="">Create Account</a>
+                </div>
+                <div>
+                    <a className="login-a-guest" href="">Continue as Guest</a>
+                </div>
             </div>
           </div>
         </main>
