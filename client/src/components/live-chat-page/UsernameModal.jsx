@@ -26,6 +26,7 @@ const UsernameModal = () => {
         <input
           id="username-modal-input"
           style={{ width: "100%", height: "38px" }}
+          placeholder="Choose your username"
         ></input>
       </Modal.Body>
       <Modal.Footer>
