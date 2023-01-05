@@ -3,6 +3,7 @@ const cors = require("cors");
 const { Client } = require("pg");
 
 const config = require("./config")[process.env.NODE_ENV || "dev"];
+console.log('config',config);
 const PORT = config.port;
 
 const client = new Client({
