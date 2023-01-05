@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Button, Modal, Container, Row, Col } from "react-bootstrap";
 
 function MenuModal() {
-  // const [fullscreen, setFullscreen] = useState(true);
   const [show, setShow] = useState(false);
 
   function handleShow() {
@@ -29,7 +28,6 @@ function MenuModal() {
       <Modal
         id="modal-main"
         show={show}
-        //   fullscreen={fullscreen}
         onHide={() => setShow(false)}
       >
         <Modal.Header closeButton closeVariant="black" id="modal-header">
