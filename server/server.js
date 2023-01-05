@@ -22,7 +22,11 @@ app.get("/", (req, res) => {
 
 app.get("/");
 
-app.get("/api/");
+// app.get("/api/messages", (req, res) => {
+//   client.query('SELECT * FROM messages')
+//   .then()
+//   .catch();
+// });
 
 app.listen(PORT, () => {
   console.log(`Our app is running on port: ${PORT}`);
