@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import NavBar from "./components/live-chat-page/Navbar";
 import LiveChatPage from "./components/live-chat-page/LiveChatPage";
 import Login from "./components/live-chat-page/Login";
+import NavBarLogin from "./components/live-chat-page/NavbarLogin";
 
 function App() {
   const [chatData, setChatData] = useState();
@@ -13,9 +14,10 @@ function App() {
   return (
     <appContext.Provider value={{ ...contextData }}>
       <div className="App">
-        <NavBar />
-        {/* <LiveChatPage /> */}
-        <Login></Login>
+        {/* <NavBar /> 
+        <LiveChatPage /> */}
+        <NavBarLogin />
+        <Login />
       </div>
     </appContext.Provider>
   );

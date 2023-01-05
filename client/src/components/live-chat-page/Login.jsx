@@ -1,3 +1,6 @@
+import Button from "react-bootstrap/Button";
+import Form from 'react-bootstrap/Form';
+
 const Login = () => {
     return (
       <div>
@@ -7,9 +10,25 @@ const Login = () => {
                 <div className="login-title">USER LOGIN</div>
                 <div className="login-welcome">Welcome to the WorldWideChat</div>
             </div>
-            <input type="text" />
-            <input type="text" />
-            
+            <input className="login-username" placeholder="Username" type="text" />
+            <input className="login-password" placeholder="Password" type="password" />
+            <div className="login-selection">
+                <div className="login-remember">
+                        <Form >
+                            <Form.Check 
+                                 id={'login-box'}
+                                />
+                        </Form>
+                    <div>Remember</div>
+                </div>
+                <div className="login-forget">
+                    <a  className="login-a-forget"href="">Forgot your password?</a>
+                </div>
+            </div>
+            <Button id="login-login">LOGIN</Button>
+            <div className="login-create">
+                <a className="login-a-create" href="">Create Account</a>
+            </div>
           </div>
         </main>
       </div>
@@ -19,20 +38,3 @@ const Login = () => {
   export default Login;
   
 
-//   <div id="chat-wrapper">
-//           <div id="chat-content">
-//             <RecipientChatBlurb />
-//             <UserChatBlurb />
-//             <RecipientChatBlurb />
-//             <UserChatBlurb />
-//             <RecipientChatBlurb />
-//             <UserChatBlurb />
-//             <RecipientChatBlurb />
-//             <UserChatBlurb />
-//             <RecipientChatBlurb />
-//             <UserChatBlurb />
-//             <RecipientChatBlurb />
-//             <UserChatBlurb />
-//             <RecipientChatBlurb />
-//             <UserChatBlurb />
-//           </div>
