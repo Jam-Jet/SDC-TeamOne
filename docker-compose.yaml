@@ -9,6 +9,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=pass 
       - POSTGRES_DB=my_db
+    volumes:
+      - pgdatasource:/var/lib/postgresql/data
     
   
   api:
@@ -28,3 +30,5 @@ services:
       - "3004:3004"
     depends_on:
       - api
+volumes:
+  pgdatasource:

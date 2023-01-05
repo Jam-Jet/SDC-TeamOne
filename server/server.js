@@ -20,11 +20,6 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-<<<<<<< HEAD
-app.get("/");
-
-app.get("/api/");
-=======
 app.get("/users", (req, res) => {
   client.query('SELECT * FROM users')
   .then(result=> {
@@ -47,7 +42,6 @@ app.post('/addGuest', (req, res)=>{
 
 
 
->>>>>>> 0464d1c25ffd2b55a6ab689618af607e266c4c20
 
 app.listen(PORT, () => {
   console.log(`Our app is running on port: ${PORT}`);
