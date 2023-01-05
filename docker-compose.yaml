@@ -19,3 +19,5 @@ services:
     environment:
       - POSTGRES_CONNECTION_STRING=postgresql://user:pass@database/my_db
       - NODE_ENV=production
+    depends_on:
+      - database
