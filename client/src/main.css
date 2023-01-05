@@ -169,4 +169,20 @@ main {
   margin-top: -18px;
 }
 
+/* --------------------------Log-In Page------------------------------- */
+#login-main{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  border: 2px solid #dddddd;
+  border-radius: 15px;
+  background-color: #eeeeee;
+  box-shadow: #dddddd 0px 6px 16px 0px;
+  padding: 24px;
+  min-width: 400px;
+  max-width: 800px;
+  height: 550px;
+}
 /* --------------------------------------------------------- */
