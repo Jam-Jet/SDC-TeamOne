@@ -42,6 +42,11 @@ app.post('/addGuest', (req, res)=>{
 
 
 
+// app.get("/api/messages", (req, res) => {
+//   client.query('SELECT * FROM messages')
+//   .then()
+//   .catch();
+// });
 
 app.listen(PORT, () => {
   console.log(`Our app is running on port: ${PORT}`);
