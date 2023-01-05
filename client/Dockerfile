@@ -17,4 +17,5 @@ RUN npm run build
 
 EXPOSE 3004
 
+#starts web server
 CMD node webserver.cjs

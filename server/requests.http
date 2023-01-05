@@ -1,0 +1,13 @@
+### Server check
+GET http://localhost:3003/
+
+
+### Get all users
+GET http://localhost:3003/users
+
+
+### Add New Phone
+POST  http://localhost:3003/addGuest
+Content-Type: application/json
+
+{"name": "John"}
