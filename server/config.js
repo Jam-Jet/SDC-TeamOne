@@ -4,7 +4,7 @@ module.exports = {
     port: "3003",
   },
   production: {
-    connectionString: process.env.POSTGRES_CONNECTION_STRING + "?ssl=true",
+    connectionString: process.env.POSTGRES_CONNECTION_STRING ,
     port: process.env.PORT,
   },
 };
