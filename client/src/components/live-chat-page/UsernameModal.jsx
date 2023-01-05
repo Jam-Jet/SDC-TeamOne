@@ -1,27 +1,35 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { useContext } from "react";
+import { appContext } from "../../App";
 
-function UsernameModal(props) {
+const UsernameModal = () => {
+  const { showUsernameModal, setShowUsernameModal } = useContext(appContext);
+  const handleHide = () => {
+    setShowUsernameModal(false);
+  };
+
   return (
-    <Modal size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
+    <Modal
+      show={showUsernameModal}
+      onHide={handleHide}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Modal heading
+          Choose Your Username
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        <h4>Centered Modal</h4>
-        <p>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-          dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-          consectetur ac, vestibulum at eros.
-        </p>
+      <Modal.Body style={{ backgroundColor: "white" }}>
+        <input style={{ width: "90%" }}></input>
+        <Button onClick={handleHide}>Close</Button>
       </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer>
+      {/* <Modal.Footer>
+      </Modal.Footer> */}
     </Modal>
   );
-}
+};
 
 export default UsernameModal;
