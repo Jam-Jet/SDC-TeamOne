@@ -7,16 +7,18 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_DB=my_db
+      - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=pass 
-      - POSTGRES_USER=user
-    volumes:
-      - ./server/postgres-data:/var/lib/postgresql/data
+      - POSTGRES_DB=my_db
+    
   
   api:
     build: ./server
+    restart: always
     ports:
       - "3003:3003"
     environment:
-      - POSTGRES_CONNECTION_STRING=postgresql://user:pass@database/my_db
+      - POSTGRES_CONNECTION_STRING=postgresql://postgres:pass@database/my_db
       - NODE_ENV=production
+    depends_on:
+      - database
