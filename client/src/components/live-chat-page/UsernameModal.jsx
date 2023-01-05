@@ -9,6 +9,14 @@ const UsernameModal = () => {
   const handleHide = () => {
     setShowUsernameModal(false);
   };
+  const recordUsername = (e) => {
+    setCurrentUsername(e.target.value);
+  };
+  const submitUsername = (e) => {
+    if (e.key === "Enter" || e.type === "click") {
+      handleHide();
+    }
+  };
 
   return (
     <Modal
@@ -29,12 +37,14 @@ const UsernameModal = () => {
           id="username-modal-input"
           style={{ width: "100%", height: "38px" }}
           placeholder="Choose your username"
+          onChange={recordUsername}
+          onKeyPress={submitUsername}
         ></input>
       </Modal.Body>
       <Modal.Footer>
         <Button
           variant="dark"
-          onClick={handleHide}
+          onClick={submitUsername}
           style={{ backgroundColor: "#353a41" }}
         >
           Continue

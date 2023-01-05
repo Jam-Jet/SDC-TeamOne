@@ -7,19 +7,25 @@ import NavBarLogin from "./components/log-in-page/NavbarLogin";
 
 function App() {
   const [continueAsGuest, setContinueAsGuest] = useState(false);
-  const [currentUsername, setCurrentUsername] = useState("");
   const [showUsernameModal, setShowUsernameModal] = useState(true);
+  const [currentUsername, setCurrentUsername] = useState("");
+  const [currentMessage, setCurrentMessage] = useState("");
   const [chatData, setChatData] = useState();
   const contextData = {
     continueAsGuest,
     setContinueAsGuest,
-    currentUsername,
-    setCurrentUsername,
     showUsernameModal,
     setShowUsernameModal,
+    currentUsername,
+    setCurrentUsername,
+    currentMessage,
+    setCurrentMessage,
     chatData,
     setChatData,
   };
+
+  console.log("currentUsername: ", currentUsername);
+  console.log("currentMessage: ", currentMessage);
 
   return (
     <appContext.Provider value={{ ...contextData }}>
