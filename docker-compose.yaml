@@ -10,8 +10,7 @@ services:
       - POSTGRES_DB=my_db
       - POSTGRES_PASSWORD=pass 
       - POSTGRES_USER=user
-    volumes:
-      - ./server/postgres-data:/var/lib/postgresql/data
+    
   
   api:
     build: ./server
