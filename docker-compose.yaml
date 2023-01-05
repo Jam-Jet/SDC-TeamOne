@@ -13,7 +13,6 @@ services:
   
   api:
     build: ./server
-    restart: always
     ports:
       - "3003:3003"
     environment:
@@ -21,6 +20,7 @@ services:
       - NODE_ENV=production
     depends_on:
       - database
+    restart: always
 
   frontend:
     build: ./client
