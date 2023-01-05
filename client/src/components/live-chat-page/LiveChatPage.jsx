@@ -1,10 +1,14 @@
 import UserChatBlurb from "./UserChatBlurb";
 import RecipientChatBlurb from "./RecipientChatBlurb";
 import Button from "react-bootstrap/Button";
+import UsernameModal from "./UsernameModal";
+import NavBar from "./Navbar";
 
 const LiveChatPage = () => {
   return (
     <div>
+      <UsernameModal />
+      <NavBar />
       <main>
         <div id="chat-header">
           <div id="header-line"></div>
