@@ -19,14 +19,23 @@ const UsernameModal = () => {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Guest Username:
+          Guest Username
         </Modal.Title>
       </Modal.Header>
       <Modal.Body style={{ backgroundColor: "white" }}>
         <input
           id="username-modal-input"
-          style={{ width: "390px", height: "40px" }}
+          style={{ width: "100%", height: "38px" }}
         ></input>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button
+          variant="dark"
+          onClick={handleHide}
+          style={{ backgroundColor: "#353a41" }}
+        >
+          Continue
+        </Button>
         <Button
           variant="secondary"
           onClick={handleHide}
@@ -34,8 +43,7 @@ const UsernameModal = () => {
         >
           Close
         </Button>
-      </Modal.Body>
-      <Modal.Footer></Modal.Footer>
+      </Modal.Footer>
     </Modal>
   );
 };
