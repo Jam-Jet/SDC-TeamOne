@@ -168,5 +168,12 @@ main {
   margin-left: 10px;
   margin-top: -18px;
 }
+#username-modal-input {
+  width: 390px;
+  height: 40px;
+}
+#username-modal-input.text:focus {
+  border-color: #353a41;
+}
 
 /* --------------------------------------------------------- */
