@@ -250,6 +250,7 @@ main {
 .login-create{
   display: flex;
   margin-top: 20px;
+  margin-left: 10px;
  
 }
 .login-a-create{
