@@ -180,4 +180,96 @@ main {
   box-shadow: 0 0 10px #abacae;
 }
 
+/* --------------------------Log-In Page------------------------------- */
+#login-main{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  margin: auto;
+  border: 2px solid #dddddd;
+  border-radius: 15px;
+  background-color: #eeeeee;
+  box-shadow: #dddddd 0px 6px 16px 0px;
+  padding: 24px;
+  min-width: 400px;
+  max-width: 600px;
+  height: 550px;
+}
+.login-title{
+  font-size: 50px;
+  height: 70px;
+  padding-top: 10px;
+}
+.login-welcome{
+  height: 50px;
+  padding-top: 30px;
+}
+.login-username{
+  width: 80%;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid #dddddd;
+  min-width: 300px;
+  max-width: 800px;
+  margin-top: 40px;
+  margin-bottom: 10px;
+}
+.login-password{
+  width: 80%;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid #dddddd;
+  min-width: 300px;
+  max-width: 800px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+#login-box{
+  margin-right: 10px;
+}
+.login-remember{
+  display: flex;
+  margin-right: 100px;
+  width: 50%;
+}
+.login-selection{
+  display: flex;
+  margin-top: 20px;
+  width: 80%;
+}
+.login-forget{
+  width: 50%;
+  text-align: right;
+}
+.login-a-forget{
+  color: #353a41;
+}
+#login-login{
+  border-radius: 8px;
+  background-color: #636363;
+  border: 2px solid #dddddd;
+  font-size: x-large;
+  height: 50px;
+  width: 150px;
+  margin-top: 50px;
+  padding-top: 3px;
+}
+#login-login:hover{
+  background-color: #353a41;
+}
+.login-create{
+  display: flex;
+  margin-top: 20px;
+  margin-left: 10px;
+ 
+}
+.login-a-create{
+  color: #636363;
+  margin-right: 10px;
+}
+.login-a-guest{
+  color: #636363;
+  margin-left: 10px;
+}
 /* --------------------------------------------------------- */

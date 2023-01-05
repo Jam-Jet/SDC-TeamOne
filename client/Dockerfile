@@ -2,7 +2,6 @@ FROM node:alpine
 
 #sets the working directory to app
 WORKDIR /app
-COPY . /app
 
 #copies package.json to app folder
 COPY package*.json ./
@@ -13,7 +12,9 @@ RUN npm install
 #copy files over
 COPY . .
 
-ENV PORT 3003
-EXPOSE 3003
+#build vite site
+RUN npm run build
 
-CMD ["node", "server.js"]
+EXPOSE 3004
+
+CMD node webserver.cjs
