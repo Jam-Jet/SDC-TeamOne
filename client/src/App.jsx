@@ -8,23 +8,51 @@ import NavBarLogin from "./components/log-in-page/NavbarLogin";
 function App() {
   const [continueAsGuest, setContinueAsGuest] = useState(false);
   const [showUsernameModal, setShowUsernameModal] = useState(true);
-  const [currentUsername, setCurrentUsername] = useState("");
+  const [currentUserData, setCurrentUserData] = useState({});
   const [currentMessage, setCurrentMessage] = useState("");
+  const [newUser, setNewUser] = useState(false);
   const [chatData, setChatData] = useState();
+  const [userList, setUserList] = useState();
+
   const contextData = {
     continueAsGuest,
     setContinueAsGuest,
     showUsernameModal,
     setShowUsernameModal,
-    currentUsername,
-    setCurrentUsername,
+    currentUserData,
+    setCurrentUserData,
     currentMessage,
     setCurrentMessage,
+    newUser,
+    setNewUser,
     chatData,
     setChatData,
+    userList,
+    setUserList,
   };
 
-  console.log("currentUsername: ", currentUsername);
+  useEffect(() => {
+    fetch("http://localhost:3003/users")
+      .then((res) => res.json())
+      .then((data) => setUserList(data));
+  }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:3003/users")
+      .then((res) => res.json())
+      .then((data) => setUserList(data))
+      .then(setNewUser(false));
+  }, [newUser]);
+
+  setTimeout(() => {
+    fetch("http://localhost:3003/messages")
+      .then((res) => res.json())
+      .then((data) => setChatData(data));
+  }, 500);
+
+  console.log("chatData: ", chatData);
+  console.log("currentUserData: ", currentUserData);
+  console.log("currentUserData.user_id:", currentUserData.user_id);
   console.log("currentMessage: ", currentMessage);
 
   return (

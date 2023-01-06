@@ -1,13 +1,15 @@
-const RecipientChatBlurb = () => {
+import { propTypes } from "react-bootstrap/esm/Image";
+
+const RecipientChatBlurb = (props) => {
   return (
     <div id="recipient-chat-blurb-wrapper">
       <div id="text-and-recipientname-row">
         <span id="recipient-name">
-          <b>Tim</b>
+          <b>{props.username}</b>
         </span>
-        <p id="recipient-message">sup broskii</p>
+        <p id="recipient-message">{props.message}</p>
       </div>
-      <span id="recipient-time-stamp">2023-01-04 16:35</span>
+      <span id="recipient-time-stamp">{props.send_date}</span>
     </div>
   );
 };

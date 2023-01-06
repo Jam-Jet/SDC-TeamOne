@@ -44,11 +44,12 @@ app.get("/messages", (req, res) => {
 
 app.post("/addGuest", (req, res) => {
   let name = req.body.name;
-  let queryString = "INSERT INTO users(name) VALUES($1)";
+  let queryString = "INSERT INTO users(name) VALUES($1) RETURNING *";
   client
     .query(queryString, [name])
     .then((result) => {
-      res.status(200).send(`user '${name}' added successfully`);
+      // res.status(200).send(`user '${name}' added successfully`);
+      res.json(result.rows[0].user_id);
     })
     .catch((err) => {
       res.status(400).send("cant add user");
@@ -58,11 +59,14 @@ app.post("/addGuest", (req, res) => {
 app.post("/addMessage", (req, res) => {
   let message = req.body.message;
   let send_date = req.body.send_date;
-  let user_id = req.body.user_id;
+  let username = req.body.username;
+  // let user_id = req.body.user_id;
   let queryString =
-    "INSERT INTO messages(message, send_date, user_id) VALUES ($1, $2, $3)";
+    "INSERT INTO messages(message, send_date, username) VALUES ($1, $2, $3)";
+  // "INSERT INTO messages(message, send_date, user_id) VALUES ($1, $2, $3)";
   client
-    .query(queryString, [message, send_date, user_id])
+    .query(queryString, [message, send_date, username])
+    // .query(queryString, [message, send_date, user_id])
     .then((result) => {
       res.status(200).send(`message added successfully`);
     })
