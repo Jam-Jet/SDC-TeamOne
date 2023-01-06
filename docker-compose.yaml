@@ -11,6 +11,8 @@ services:
       - POSTGRES_DB=my_db
     volumes:
       - pgdatasource:/var/lib/postgresql/data
+      - ./server/migration.sql:/docker-entrypoint-initdb.d/migration.sql
+      - ./server/seed.sql:/docker-entrypoint-initdb.d/seed.sql
     
   
   api:
