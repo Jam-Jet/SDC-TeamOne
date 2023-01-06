@@ -4,17 +4,32 @@ import { useContext } from "react";
 import { appContext } from "../../App";
 
 const UsernameModal = () => {
-  const { showUsernameModal, setShowUsernameModal, setCurrentUsername } =
-    useContext(appContext);
+  const {
+    showUsernameModal,
+    setShowUsernameModal,
+    setCurrentUsername,
+    currentUsername,
+  } = useContext(appContext);
+
   const handleHide = () => {
     setShowUsernameModal(false);
   };
   const recordUsername = (e) => {
     setCurrentUsername(e.target.value);
   };
+
   const submitUsername = (e) => {
     if (e.key === "Enter" || e.type === "click") {
-      handleHide();
+      let postObj = {
+        name: currentUsername,
+      };
+      fetch("http://localhost:3003/addGuest", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postObj),
+      }).then(handleHide());
     }
   };
 

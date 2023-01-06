@@ -8,14 +8,27 @@ import { appContext } from "../../App";
 
 const LiveChatPage = () => {
   const { setCurrentMessage, currentMessage } = useContext(appContext);
+  const currentTime = new Date();
   const recordMessage = (e) => {
     setCurrentMessage(e.target.value);
   };
   const submitMessage = (e) => {
     if (e.key === "Enter" || e.type === "click") {
-      console.log(`message sent: ${currentMessage}`);
-      setCurrentMessage("");
-      document.getElementById("chat-input").value = "";
+      let postObj = {
+        message: currentMessage,
+        send_date: currentTime,
+        user_id: 1,
+      };
+      fetch("http://localhost:3003/addMessage", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postObj),
+      })
+        .then(console.log(`message sent: ${currentMessage}`))
+        .then(setCurrentMessage(""))
+        .then((document.getElementById("chat-input").value = ""));
     }
   };
   return (
