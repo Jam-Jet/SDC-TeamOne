@@ -7,21 +7,23 @@ const UsernameModal = () => {
   const {
     showUsernameModal,
     setShowUsernameModal,
-    setCurrentUsername,
-    currentUsername,
+    setCurrentUserData,
+    currentUserData,
+    setNewUser,
+    userList,
   } = useContext(appContext);
 
   const handleHide = () => {
     setShowUsernameModal(false);
   };
   const recordUsername = (e) => {
-    setCurrentUsername(e.target.value);
+    setCurrentUserData({ username: e.target.value });
   };
 
   const submitUsername = (e) => {
     if (e.key === "Enter" || e.type === "click") {
       let postObj = {
-        name: currentUsername,
+        name: currentUserData.username,
       };
       fetch("http://localhost:3003/addGuest", {
         method: "POST",
@@ -29,7 +31,15 @@ const UsernameModal = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(postObj),
-      }).then(handleHide());
+      })
+        .then((res) =>
+          setCurrentUserData({
+            username: currentUserData.username,
+            user_id: res.json(),
+          })
+        )
+        .then(setNewUser(true))
+        .then(handleHide());
     }
   };
 

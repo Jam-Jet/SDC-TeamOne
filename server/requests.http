@@ -20,4 +20,10 @@ Content-Type: application/json
 POST  http://localhost:3003/addMessage
 Content-Type: application/json
 
-{"message": "LESSGOOOOOO", "send_date": "2023-01-05 16:46:00", "user_id": 2}
+{"message": "LESSGOOOOOO", "send_date": "2023-01-05 16:46:00", "username": "John"}
+
+# ### Add New Message
+# POST  http://localhost:3003/addMessage
+# Content-Type: application/json
+
+# {"message": "LESSGOOOOOO", "send_date": "2023-01-05 16:46:00", "user_id": 2}

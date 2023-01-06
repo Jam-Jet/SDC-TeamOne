@@ -7,7 +7,13 @@ import { useContext } from "react";
 import { appContext } from "../../App";
 
 const LiveChatPage = () => {
-  const { setCurrentMessage, currentMessage } = useContext(appContext);
+  const {
+    setCurrentMessage,
+    currentMessage,
+    // setChangeMade,
+    chatData,
+    currentUserData,
+  } = useContext(appContext);
   const currentTime = new Date();
   const recordMessage = (e) => {
     setCurrentMessage(e.target.value);
@@ -17,7 +23,7 @@ const LiveChatPage = () => {
       let postObj = {
         message: currentMessage,
         send_date: currentTime,
-        user_id: 1,
+        username: currentUserData.username,
       };
       fetch("http://localhost:3003/addMessage", {
         method: "POST",
@@ -26,6 +32,7 @@ const LiveChatPage = () => {
         },
         body: JSON.stringify(postObj),
       })
+        // .then(setChangeMade(true))
         .then(console.log(`message sent: ${currentMessage}`))
         .then(setCurrentMessage(""))
         .then((document.getElementById("chat-input").value = ""));
@@ -43,7 +50,26 @@ const LiveChatPage = () => {
         </div>
         <div id="chat-wrapper">
           <div id="chat-content">
-            <RecipientChatBlurb />
+            {chatData.map((message, i) => {
+              if (message.username === currentUserData.username) {
+                return (
+                  <UserChatBlurb
+                    message={message.message}
+                    send_date={message.send_date}
+                    username={message.username}
+                  />
+                );
+              } else {
+                return (
+                  <RecipientChatBlurb
+                    message={message.message}
+                    send_date={message.send_date}
+                    username={message.username}
+                  />
+                );
+              }
+            })}
+            {/* <RecipientChatBlurb />
             <UserChatBlurb />
             <RecipientChatBlurb />
             <UserChatBlurb />
@@ -56,7 +82,7 @@ const LiveChatPage = () => {
             <RecipientChatBlurb />
             <UserChatBlurb />
             <RecipientChatBlurb />
-            <UserChatBlurb />
+            <UserChatBlurb /> */}
           </div>
           <div id="input-and-btn-wrapper">
             <input
