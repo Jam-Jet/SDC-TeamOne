@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const { Client } = require("pg");
 
+
 const config = require("./config")[process.env.NODE_ENV || "dev"];
 console.log("config", config);
 const PORT = config.port;
@@ -95,3 +96,4 @@ app.post("/addMessage", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Our app is running on port: ${PORT}`);
 });
+
