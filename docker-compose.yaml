@@ -11,8 +11,8 @@ services:
       - POSTGRES_DB=my_db
     volumes:
       - pgdatasource:/var/lib/postgresql/data
-    
-  
+
+      
   api:
     build: ./server
     ports:
