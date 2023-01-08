@@ -4,7 +4,7 @@ import LiveChatPage from "./components/live-chat-page/LiveChatPage";
 import UsernameModal from "./components/live-chat-page/UsernameModal";
 import Login from "./components/log-in-page/Login";
 import NavBarLogin from "./components/log-in-page/NavbarLogin";
-import { Routes, Route } from "react-router-dom";
+//import { Routes, Route } from "react-router-dom";
 
 function App() {
   const [continueAsGuest, setContinueAsGuest] = useState(false);
