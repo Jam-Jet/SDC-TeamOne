@@ -18,6 +18,7 @@ const UsernameModal = () => {
   };
   const recordUsername = (e) => {
     setCurrentUserData({ username: e.target.value });
+    console.log(`The current value is ${e.target.value}`);
   };
 
   const submitUsername = (e) => {
@@ -25,6 +26,7 @@ const UsernameModal = () => {
       let postObj = {
         name: currentUserData.username,
       };
+      console.log(`Username = ${currentUserData.username}`);
       fetch("http://localhost:3003/addGuest", {
         method: "POST",
         headers: {
@@ -32,12 +34,14 @@ const UsernameModal = () => {
         },
         body: JSON.stringify(postObj),
       })
-        .then((res) =>
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(`This is the response! ${data.user_id}`);
           setCurrentUserData({
             username: currentUserData.username,
-            user_id: res.json(),
-          })
-        )
+            user_id: data.user_id,
+          });
+        })
         .then(setNewUser(true))
         .then(handleHide());
     }

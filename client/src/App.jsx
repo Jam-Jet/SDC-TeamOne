@@ -45,16 +45,24 @@ function App() {
       .then(setNewUser(false));
   }, [newUser]);
 
-  setTimeout(() => {
+  //Disable spam bot for now
+  // setTimeout(() => {
+  //   fetch("http://localhost:3003/messages")
+  //     .then((res) => res.json())
+  //     .then((data) => setChatData(data));
+  // }, 500);
+
+  //Temporary useEffect
+  useEffect(() => {
     fetch("http://localhost:3003/messages")
       .then((res) => res.json())
       .then((data) => setChatData(data));
-  }, 500);
+  }, []);
 
   console.log("chatData: ", chatData);
-  console.log("currentUserData: ", currentUserData);
+  //console.log("currentUserData: ", currentUserData);
   console.log("currentUserData.user_id:", currentUserData.user_id);
-  console.log("currentMessage: ", currentMessage);
+  //console.log("currentMessage: ", currentMessage);
 
   return (
     <appContext.Provider value={{ ...contextData }}>

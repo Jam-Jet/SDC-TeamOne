@@ -5,6 +5,7 @@ import UsernameModal from "./UsernameModal";
 import NavBar from "./Navbar";
 import { useContext } from "react";
 import { appContext } from "../../App";
+import { useEffect, useRef } from "react";
 
 const LiveChatPage = () => {
   const {
@@ -12,12 +13,40 @@ const LiveChatPage = () => {
     currentMessage,
     // setChangeMade,
     chatData,
+    setChatData,
     currentUserData,
   } = useContext(appContext);
+
+  const ws = useRef();
+
   const currentTime = new Date();
+
   const recordMessage = (e) => {
     setCurrentMessage(e.target.value);
   };
+
+  //When user clicks send old
+  // const submitMessage = (e) => {
+  //   if (e.key === "Enter" || e.type === "click") {
+  //     let postObj = {
+  //       message: currentMessage,
+  //       send_date: currentTime,
+  //       username: currentUserData.username,
+  //     };
+  //     fetch("http://localhost:3003/addMessage", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(postObj),
+  //     })
+  //       // .then(setChangeMade(true))
+  //       .then(console.log(`message sent: ${currentMessage}`))
+  //       .then(setCurrentMessage(""))
+  //       .then((document.getElementById("chat-input").value = ""));
+  //   }
+  // };
+
   const submitMessage = (e) => {
     if (e.key === "Enter" || e.type === "click") {
       let postObj = {
@@ -25,19 +54,36 @@ const LiveChatPage = () => {
         send_date: currentTime,
         username: currentUserData.username,
       };
-      fetch("http://localhost:3003/addMessage", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(postObj),
-      })
-        // .then(setChangeMade(true))
-        .then(console.log(`message sent: ${currentMessage}`))
-        .then(setCurrentMessage(""))
-        .then((document.getElementById("chat-input").value = ""));
+
+      ws.current.send(JSON.stringify(postObj));
+
+      // .then(setChangeMade(true))
+      console.log(`message sent: ${currentMessage}`);
+      console.log(`Post Object ${postObj}`);
+      setCurrentMessage("");
+      document.getElementById("chat-input").value = "";
     }
   };
+
+  useEffect(() => {
+    ws.current = new WebSocket("ws://localhost:3003");
+
+    ws.current.onopen = () => {
+      console.log("WS connection opened!");
+      setConnectionOpen(true);
+    };
+
+    ws.current.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      setChatData((_messages) => [..._messages, data]);
+    };
+
+    return () => {
+      console.log("Cleaning up...");
+      ws.current.close();
+    };
+  }, []);
+
   return (
     <div>
       <UsernameModal />
