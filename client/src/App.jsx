@@ -59,9 +59,9 @@ function App() {
       .then((data) => setChatData(data));
   }, []);
 
-  console.log("chatData: ", chatData);
+  // console.log("chatData: ", chatData);
   //console.log("currentUserData: ", currentUserData);
-  console.log("currentUserData.user_id:", currentUserData.user_id);
+  // console.log("currentUserData.user_id:", currentUserData.user_id);
   //console.log("currentMessage: ", currentMessage);
 
   return (

@@ -110,7 +110,7 @@ main {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 15%;
+  min-height: 15%;
   border: 1px solid #dddddd;
   border-radius: 8px;
   background-color: #dddddd;
@@ -181,7 +181,7 @@ main {
 }
 
 /* --------------------------Log-In Page------------------------------- */
-#login-main{
+#login-main {
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -196,16 +196,16 @@ main {
   max-width: 600px;
   height: 550px;
 }
-.login-title{
+.login-title {
   font-size: 50px;
   height: 70px;
   padding-top: 10px;
 }
-.login-welcome{
+.login-welcome {
   height: 50px;
   padding-top: 30px;
 }
-.login-username{
+.login-username {
   width: 80%;
   height: 40px;
   border-radius: 8px;
@@ -215,7 +215,7 @@ main {
   margin-top: 40px;
   margin-bottom: 10px;
 }
-.login-password{
+.login-password {
   width: 80%;
   height: 40px;
   border-radius: 8px;
@@ -225,27 +225,27 @@ main {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-#login-box{
+#login-box {
   margin-right: 10px;
 }
-.login-remember{
+.login-remember {
   display: flex;
   margin-right: 100px;
   width: 50%;
 }
-.login-selection{
+.login-selection {
   display: flex;
   margin-top: 20px;
   width: 80%;
 }
-.login-forget{
+.login-forget {
   width: 50%;
   text-align: right;
 }
-.login-a-forget{
+.login-a-forget {
   color: #353a41;
 }
-#login-login{
+#login-login {
   border-radius: 8px;
   background-color: #636363;
   border: 2px solid #dddddd;
@@ -255,20 +255,19 @@ main {
   margin-top: 50px;
   padding-top: 3px;
 }
-#login-login:hover{
+#login-login:hover {
   background-color: #353a41;
 }
-.login-create{
+.login-create {
   display: flex;
   margin-top: 20px;
   margin-left: 10px;
- 
 }
-.login-a-create{
+.login-a-create {
   color: #636363;
   margin-right: 10px;
 }
-.login-a-guest{
+.login-a-guest {
   color: #636363;
   margin-left: 10px;
 }

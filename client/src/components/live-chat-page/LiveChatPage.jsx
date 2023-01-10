@@ -3,9 +3,8 @@ import RecipientChatBlurb from "./RecipientChatBlurb";
 import Button from "react-bootstrap/Button";
 import UsernameModal from "./UsernameModal";
 import NavBar from "./Navbar";
-import { useContext } from "react";
 import { appContext } from "../../App";
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 
 const LiveChatPage = () => {
   const {
@@ -46,6 +45,7 @@ const LiveChatPage = () => {
   //       .then((document.getElementById("chat-input").value = ""));
   //   }
   // };
+  const scrollTarget = useRef();
 
   const submitMessage = (e) => {
     if (e.key === "Enter" || e.type === "click") {
@@ -56,12 +56,9 @@ const LiveChatPage = () => {
       };
 
       ws.current.send(JSON.stringify(postObj));
-
-      // .then(setChangeMade(true))
-      console.log(`message sent: ${currentMessage}`);
-      console.log(`Post Object ${postObj}`);
       setCurrentMessage("");
       document.getElementById("chat-input").value = "";
+      scrollTarget.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -96,39 +93,31 @@ const LiveChatPage = () => {
         </div>
         <div id="chat-wrapper">
           <div id="chat-content">
-            {chatData.map((message, i) => {
-              if (message.username === currentUserData.username) {
-                return (
-                  <UserChatBlurb
-                    message={message.message}
-                    send_date={message.send_date}
-                    username={message.username}
-                  />
-                );
-              } else {
-                return (
-                  <RecipientChatBlurb
-                    message={message.message}
-                    send_date={message.send_date}
-                    username={message.username}
-                  />
-                );
+            {chatData.map((message, i, arr) => {
+              if (i >= arr.length - 100) {
+                if (message.username === currentUserData.username) {
+                  return (
+                    <UserChatBlurb
+                      message={message.message}
+                      send_date={message.send_date}
+                      username={message.username}
+                    />
+                  );
+                } else {
+                  return (
+                    <RecipientChatBlurb
+                      message={message.message}
+                      send_date={message.send_date}
+                      username={message.username}
+                    />
+                  );
+                }
               }
             })}
-            {/* <RecipientChatBlurb />
-            <UserChatBlurb />
-            <RecipientChatBlurb />
-            <UserChatBlurb />
-            <RecipientChatBlurb />
-            <UserChatBlurb />
-            <RecipientChatBlurb />
-            <UserChatBlurb />
-            <RecipientChatBlurb />
-            <UserChatBlurb />
-            <RecipientChatBlurb />
-            <UserChatBlurb />
-            <RecipientChatBlurb />
-            <UserChatBlurb /> */}
+            <div></div>
+            <div></div>
+            <div></div>
+            <div ref={scrollTarget}></div>
           </div>
           <div id="input-and-btn-wrapper">
             <input
