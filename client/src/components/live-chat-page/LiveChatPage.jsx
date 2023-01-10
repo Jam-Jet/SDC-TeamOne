@@ -17,8 +17,13 @@ const LiveChatPage = () => {
   } = useContext(appContext);
 
   const ws = useRef();
-
+  const scrollTarget = useRef();
   const currentTime = new Date();
+
+  let min = 500;
+  let max = 5000;
+  let randomInterval = Math.floor(Math.random() * (max - min) + min);
+  console.log(randomInterval);
 
   const recordMessage = (e) => {
     setCurrentMessage(e.target.value);
@@ -45,7 +50,6 @@ const LiveChatPage = () => {
   //       .then((document.getElementById("chat-input").value = ""));
   //   }
   // };
-  const scrollTarget = useRef();
 
   const submitMessage = (e) => {
     if (e.key === "Enter" || e.type === "click") {
@@ -81,6 +85,10 @@ const LiveChatPage = () => {
     };
   }, []);
 
+  // useEffect(() => {
+  //   scrollTarget.current.scrollIntoView({ behavior: "smooth" });
+  // }, []);
+
   return (
     <div>
       <UsernameModal />
@@ -104,13 +112,17 @@ const LiveChatPage = () => {
                     />
                   );
                 } else {
-                  return (
-                    <RecipientChatBlurb
-                      message={message.message}
-                      send_date={message.send_date}
-                      username={message.username}
-                    />
-                  );
+                  {
+                    {
+                      return (
+                        <RecipientChatBlurb
+                          message={message.message}
+                          send_date={message.send_date}
+                          username={message.username}
+                        />
+                      );
+                    }
+                  }
                 }
               }
             })}
