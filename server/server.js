@@ -112,6 +112,7 @@ const wss = new WebSocket.Server({server});
 //Stores connect users
 const users = new Set();
 
+
 //Function to send ws message to all users
 function sendMessage (message){
   users.forEach((user)=>{
@@ -135,12 +136,27 @@ wss.on('connection', (ws)=>{
       const messageToSend = {
         username: data.username,
         message: data.message,
-        send_date: Date.now()
+        send_date: new Date()
       }
 
       /*
         Need to store messages in database here
       */
+
+        let queryString =
+        "INSERT INTO messages(message, send_date, username) VALUES ($1, $2, $3)";
+      client
+      .query(queryString, [messageToSend.message, messageToSend.send_date, messageToSend.username])
+        .then((result) => {
+          console.log('Message stored in database');
+          console.log(result);
+          console.log(messageToSend);
+        })
+        .catch((err) => {
+          console.log("Failed", err);
+        });
+
+
 
       //Send to all users
       sendMessage(messageToSend);
