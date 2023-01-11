@@ -4,18 +4,19 @@ import Button from "react-bootstrap/Button";
 import UsernameModal from "./UsernameModal";
 import NavBar from "./Navbar";
 import { appContext } from "../../App";
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 const LiveChatPage = () => {
   const {
     setCurrentMessage,
     currentMessage,
-    // setChangeMade,
     chatData,
     setChatData,
     currentUserData,
   } = useContext(appContext);
 
+  const [count, setCount] = useState(1);
+  const [randomMessageData, setRandomMessageData] = useState();
   const ws = useRef();
   const scrollTarget = useRef();
   const currentTime = new Date();
@@ -29,6 +30,19 @@ const LiveChatPage = () => {
     setCurrentMessage(e.target.value);
   };
 
+  useEffect(() => {
+    console.log("count: ", count);
+    setCount((_count) => {
+      _count += 1;
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log("count: ", count);
+    setCount((_count) => {
+      _count++;
+    });
+  }, [count]);
   //When user clicks send old
   // const submitMessage = (e) => {
   //   if (e.key === "Enter" || e.type === "click") {
@@ -125,6 +139,18 @@ const LiveChatPage = () => {
                 }
               }
             })}
+            {/* {
+              (useEffect(() => {
+                return (
+                  <RecipientChatBlurb
+                    message={randomMessageData.message}
+                    send_date={randomMessageData.send_date}
+                    username={randomMessageData.username}
+                  />
+                );
+              }),
+              [randomMessageData])
+            } */}
             <div ref={scrollTarget}></div>
           </div>
           <div id="input-and-btn-wrapper">

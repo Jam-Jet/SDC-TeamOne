@@ -1,14 +1,11 @@
 const express = require("express");
 const cors = require("cors");
-const WebSocket = require('ws');
+const WebSocket = require("ws");
 const { Client } = require("pg");
-
-
 
 const config = require("./config")[process.env.NODE_ENV || "dev"];
 //console.log("config", config);
 const PORT = config.port;
-
 
 //Setting up database connection
 const client = new Client({
@@ -17,14 +14,11 @@ const client = new Client({
 
 client.connect();
 
-
 const app = express();
 //Allows cross origin requests
 app.use(cors());
 //Allows json in body
 app.use(express.json());
-
-
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -59,7 +53,7 @@ app.post("/addGuest", (req, res) => {
     .query(queryString, [name])
     .then((result) => {
       // res.status(200).send(`user '${name}' added successfully`);
-      res.json({user_id : result.rows[0].user_id});
+      res.json({ user_id: result.rows[0].user_id });
     })
     .catch((err) => {
       res.status(400).send("cant add user");
@@ -107,28 +101,27 @@ const server = app.listen(PORT, () => {
 });
 
 //Websocket
-const wss = new WebSocket.Server({server});
+const wss = new WebSocket.Server({ server });
 
 //Stores connect users
 const users = new Set();
 
-
 //Function to send ws message to all users
-function sendMessage (message){
-  users.forEach((user)=>{
-    user.ws.send(JSON.stringify(message))
+function sendMessage(message) {
+  users.forEach((user) => {
+    user.ws.send(JSON.stringify(message));
   });
 }
 
 //websocket
-wss.on('connection', (ws)=>{
+wss.on("connection", (ws) => {
   const userRef = {
     ws,
   };
   users.add(userRef);
 
-  ws.on('message', (message)=>{
-    try{
+  ws.on("message", (message) => {
+    try {
       //Parses incoming message
       const data = JSON.parse(message);
 
@@ -136,19 +129,23 @@ wss.on('connection', (ws)=>{
       const messageToSend = {
         username: data.username,
         message: data.message,
-        send_date: new Date()
-      }
+        send_date: new Date(),
+      };
 
       /*
         Need to store messages in database here
       */
 
-        let queryString =
+      let queryString =
         "INSERT INTO messages(message, send_date, username) VALUES ($1, $2, $3)";
       client
-      .query(queryString, [messageToSend.message, messageToSend.send_date, messageToSend.username])
+        .query(queryString, [
+          messageToSend.message,
+          messageToSend.send_date,
+          messageToSend.username,
+        ])
         .then((result) => {
-          console.log('Message stored in database');
+          console.log("Message stored in database");
           console.log(result);
           console.log(messageToSend);
         })
@@ -156,18 +153,15 @@ wss.on('connection', (ws)=>{
           console.log("Failed", err);
         });
 
-
-
       //Send to all users
       sendMessage(messageToSend);
-    }catch(e){
-      console.error('Error passing message!', e);
+    } catch (e) {
+      console.error("Error passing message!", e);
     }
   });
 
-  ws.on('close', (code, reason)=>{
+  ws.on("close", (code, reason) => {
     users.delete(userRef);
     console.log(`Connection closed: ${code} ${reason}!`);
   });
 });
-
