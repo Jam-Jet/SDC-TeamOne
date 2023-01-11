@@ -62,7 +62,6 @@ const LiveChatPage = () => {
       ws.current.send(JSON.stringify(postObj));
       setCurrentMessage("");
       document.getElementById("chat-input").value = "";
-      scrollTarget.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -85,9 +84,9 @@ const LiveChatPage = () => {
     };
   }, []);
 
-  // useEffect(() => {
-  //   scrollTarget.current.scrollIntoView({ behavior: "smooth" });
-  // }, []);
+  useEffect(() => {
+    scrollTarget.current.scrollIntoView({ behavior: "smooth" });
+  }, [chatData.length]);
 
   return (
     <div>
