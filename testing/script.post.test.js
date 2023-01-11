@@ -13,7 +13,7 @@ export let options = {
     loadimpact: {
       projectID: 3622560,
       // Test runs with the same name groups test runs together
-      name: "YOUR TEST NAME",
+      name: "Post Message",
     },
   },
 };
@@ -46,7 +46,7 @@ export default function () {
 
   let res = http.post(url, payload, params);
   check(res, {
-    "status was 200": (r) => r.status === 200,
+    sfsdf: (r) => r.status === 200,
     "transaction time OK": (r) => r.timings.duration < 200,
   });
 }
