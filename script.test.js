@@ -11,17 +11,18 @@ export let options = {
   duration: "30s",
 };
 
+// GET USERS REQUESTS LOAD
 // export default function () {
-//   let res = http.get('http://localhost:3003/users');
+//   let res = http.get("http://localhost:3003/users");
 //   check(res, {
 //     "status was 200": (r) => r.status === 200,
 //     "transaction time OK": (r) => r.timings.duration < 200,
-//     });
+//   });
 
 //   sleep(1);
 // }
 
-// POST REQUESTS LOAD
+// POST MESSAGE REQUESTS LOAD
 export default function () {
   const url = "http://localhost:3003/addMessage";
   const payload = JSON.stringify({

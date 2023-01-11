@@ -125,7 +125,6 @@ const LiveChatPage = () => {
                 }
               }
             })}
-            <div style={{ height: "5px" }}></div>
             <div ref={scrollTarget}></div>
           </div>
           <div id="input-and-btn-wrapper">
