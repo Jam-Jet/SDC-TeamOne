@@ -1,9 +1,10 @@
 // if you dont have k6, see this documentation for install:
 // https://k6.io/docs/get-started/installation/
-// then run from root project directory: "k6 run script.test.js"
+// run tests locally: "k6 run script.post.test.js"
+// run test to cloud for graphs: "k6 run -o cloud script.post.test.js"
 
 import http from "k6/http";
-import { check, sleep } from "k6";
+import { check } from "k6";
 
 //GET REQUESTS ACTIVE USERS HOMEPAGE
 export let options = {
@@ -18,18 +19,7 @@ export let options = {
   },
 };
 
-// GET USERS REQUESTS LOAD
-// export default function () {
-//   let res = http.get("http://localhost:3003/users");
-//   check(res, {
-//     "status was 200": (r) => r.status === 200,
-//     "transaction time OK": (r) => r.timings.duration < 200,
-//   });
-
-//   sleep(1);
-// }
-
-// POST MESSAGE REQUESTS LOAD
+// POST REQUESTS LOAD
 export default function () {
   const url = "http://localhost:3003/addMessage";
   const payload = JSON.stringify({

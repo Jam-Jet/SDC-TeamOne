@@ -46,6 +46,17 @@ app.get("/messages", (req, res) => {
     });
 });
 
+app.get("/100messages", (req, res) => {
+  client
+    .query("SELECT * FROM messages ORDER BY message_id ASC limit 100")
+    .then((result) => {
+      res.status(200).send(result.rows);
+    })
+    .catch((err) => {
+      res.status(400).send("cannot get messages");
+    });
+});
+
 app.post("/addGuest", (req, res) => {
   let name = req.body.name;
   let queryString = "INSERT INTO users(name) VALUES($1) RETURNING *";
