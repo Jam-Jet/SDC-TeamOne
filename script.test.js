@@ -7,8 +7,15 @@ import { check, sleep } from "k6";
 
 //GET REQUESTS ACTIVE USERS HOMEPAGE
 export let options = {
-  vus: 1000,
+  vus: 50,
   duration: "30s",
+  ext: {
+    loadimpact: {
+      projectID: 3622560,
+      // Test runs with the same name groups test runs together
+      name: "YOUR TEST NAME",
+    },
+  },
 };
 
 // GET USERS REQUESTS LOAD
