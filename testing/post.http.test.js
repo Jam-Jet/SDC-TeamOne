@@ -1,12 +1,11 @@
 // if you dont have k6, see this documentation for install:
 // https://k6.io/docs/get-started/installation/
-// run tests locally: "k6 run script.post.test.js"
-// run test to cloud for graphs: "k6 run -o cloud script.post.test.js"
+// run tests locally: "k6 run post.http.test.js"
+// run test to cloud for graphs: "k6 run -o cloud post.http.test.js"
 
 import http from "k6/http";
 import { check } from "k6";
 
-//GET REQUESTS ACTIVE USERS HOMEPAGE
 export let options = {
   vus: 50,
   duration: "30s",

@@ -158,6 +158,7 @@ wss.on("connection", (ws) => {
         .then((result) => {
           console.log("Message stored in database");
           console.log(result);
+          // console.log(messageToSend.send_date - Date.now());
           console.log(messageToSend);
         })
         .catch((err) => {
