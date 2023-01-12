@@ -54,7 +54,7 @@ function App() {
 
   //Temporary useEffect
   useEffect(() => {
-    fetch("http://localhost:3003/messages")
+    fetch("http://localhost:3003/last100messages")
       .then((res) => res.json())
       .then((data) => setChatData(data));
   }, []);

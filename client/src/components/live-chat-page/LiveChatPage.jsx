@@ -21,49 +21,28 @@ const LiveChatPage = () => {
   const scrollTarget = useRef();
   const currentTime = new Date();
 
-  let min = 500;
-  let max = 5000;
-  let randomInterval = Math.floor(Math.random() * (max - min) + min);
-  console.log(randomInterval);
+  // let min = 500;
+  // let max = 5000;
+  // let randomInterval = Math.floor(Math.random() * (max - min) + min);
+  // console.log(randomInterval);
+
+  // useEffect(() => {
+  //   console.log("count: ", count);
+  //   setCount((_count) => {
+  //     _count += 1;
+  //   });
+  // }, []);
+
+  // useEffect(() => {
+  //   console.log("count: ", count);
+  //   setCount((_count) => {
+  //     _count++;
+  //   });
+  // }, [count]);
 
   const recordMessage = (e) => {
     setCurrentMessage(e.target.value);
   };
-
-  useEffect(() => {
-    console.log("count: ", count);
-    setCount((_count) => {
-      _count += 1;
-    });
-  }, []);
-
-  useEffect(() => {
-    console.log("count: ", count);
-    setCount((_count) => {
-      _count++;
-    });
-  }, [count]);
-  //When user clicks send old
-  // const submitMessage = (e) => {
-  //   if (e.key === "Enter" || e.type === "click") {
-  //     let postObj = {
-  //       message: currentMessage,
-  //       send_date: currentTime,
-  //       username: currentUserData.username,
-  //     };
-  //     fetch("http://localhost:3003/addMessage", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(postObj),
-  //     })
-  //       // .then(setChangeMade(true))
-  //       .then(console.log(`message sent: ${currentMessage}`))
-  //       .then(setCurrentMessage(""))
-  //       .then((document.getElementById("chat-input").value = ""));
-  //   }
-  // };
 
   const submitMessage = (e) => {
     if (e.key === "Enter" || e.type === "click") {

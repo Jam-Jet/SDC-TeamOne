@@ -1,18 +1,18 @@
 const express = require("express");
 const cors = require("cors");
 const WebSocket = require("ws");
-const { Client } = require("pg");
+const { Pool } = require("pg");
 
 const config = require("./config")[process.env.NODE_ENV || "dev"];
 //console.log("config", config);
 const PORT = config.port;
 
 //Setting up database connection
-const client = new Client({
+const pool = new Pool({
   connectionString: config.connectionString,
 });
 
-client.connect();
+pool.connect();
 
 const app = express();
 //Allows cross origin requests
@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/users", (req, res) => {
-  client
+  pool
     .query("SELECT * FROM users")
     .then((result) => {
       res.status(200).send(result.rows);
@@ -36,7 +36,7 @@ app.get("/users", (req, res) => {
 });
 
 app.get("/messages", (req, res) => {
-  client
+  pool
     .query("SELECT * FROM messages")
     .then((result) => {
       res.status(200).send(result.rows);
@@ -47,7 +47,7 @@ app.get("/messages", (req, res) => {
 });
 
 app.get("/last100messages", (req, res) => {
-  client
+  pool
     .query(
       // `SELECT * FROM messages ORDER BY message_id DESC limit 100`
       `SELECT * FROM (SELECT * FROM messages ORDER BY message_id DESC limit 100) subquery ORDER BY message_id ASC`
@@ -61,7 +61,7 @@ app.get("/last100messages", (req, res) => {
 });
 
 app.get("/last50messages", (req, res) => {
-  client
+  pool
     .query(
       // `SELECT * FROM messages ORDER BY message_id DESC limit 100`
       `SELECT * FROM (SELECT * FROM messages ORDER BY message_id DESC limit 50) subquery ORDER BY message_id ASC`
@@ -77,7 +77,7 @@ app.get("/last50messages", (req, res) => {
 app.post("/addGuest", (req, res) => {
   let name = req.body.name;
   let queryString = "INSERT INTO users(name) VALUES($1) RETURNING *";
-  client
+  pool
     .query(queryString, [name])
     .then((result) => {
       // res.status(200).send(`user '${name}' added successfully`);
@@ -96,7 +96,7 @@ app.post("/addMessage", (req, res) => {
   let queryString =
     "INSERT INTO messages(message, send_date, username) VALUES ($1, $2, $3)";
   // "INSERT INTO messages(message, send_date, user_id) VALUES ($1, $2, $3)";
-  client
+  pool
     .query(queryString, [message, send_date, username])
     // .query(queryString, [message, send_date, user_id])
     .then((result) => {
@@ -108,7 +108,7 @@ app.post("/addMessage", (req, res) => {
 });
 
 // app.post("/addGuest/:name", (req, res) => {
-//   client
+//   pool
 //     .query(`INSERT INTO users(name) VALUES('${req.params.name}')`)
 //     .then((result) => {
 //       res.status(200).send(`user ${req.params.name} added successfully`);
@@ -119,7 +119,7 @@ app.post("/addMessage", (req, res) => {
 // });
 
 // app.get("/api/messages", (req, res) => {
-//   client.query('SELECT * FROM messages')
+//   pool.query('SELECT * FROM messages')
 //   .then()
 //   .catch();
 // });
@@ -166,7 +166,7 @@ wss.on("connection", (ws) => {
 
       let queryString =
         "INSERT INTO messages(message, send_date, username) VALUES ($1, $2, $3)";
-      client
+      pool
         .query(queryString, [
           messageToSend.message,
           messageToSend.send_date,
