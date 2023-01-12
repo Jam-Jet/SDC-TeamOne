@@ -9,8 +9,11 @@ GET http://localhost:3003/users
 ### Get all messages
 GET http://localhost:3003/messages
 
-### Get 100 messages
-GET http://localhost:3003/100messages
+### Get last 100 messages
+GET http://localhost:3003/last100messages
+
+### Get last 50 messages
+GET http://localhost:3003/last50messages
 
 ### Add New User
 POST  http://localhost:3003/addGuest

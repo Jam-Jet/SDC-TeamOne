@@ -46,9 +46,26 @@ app.get("/messages", (req, res) => {
     });
 });
 
-app.get("/100messages", (req, res) => {
+app.get("/last100messages", (req, res) => {
   client
-    .query("SELECT * FROM messages ORDER BY message_id ASC limit 100")
+    .query(
+      // `SELECT * FROM messages ORDER BY message_id DESC limit 100`
+      `SELECT * FROM (SELECT * FROM messages ORDER BY message_id DESC limit 100) subquery ORDER BY message_id ASC`
+    )
+    .then((result) => {
+      res.status(200).send(result.rows);
+    })
+    .catch((err) => {
+      res.status(400).send("cannot get messages");
+    });
+});
+
+app.get("/last50messages", (req, res) => {
+  client
+    .query(
+      // `SELECT * FROM messages ORDER BY message_id DESC limit 100`
+      `SELECT * FROM (SELECT * FROM messages ORDER BY message_id DESC limit 50) subquery ORDER BY message_id ASC`
+    )
     .then((result) => {
       res.status(200).send(result.rows);
     })
