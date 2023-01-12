@@ -1,12 +1,12 @@
 // if you dont have k6, see this documentation for install:
 // https://k6.io/docs/get-started/installation/
-// run tests locally: "k6 run script.get.test.js"
+// run tests locally: "k6 run get.http.test.js"
 // run test to cloud for graphs: "k6 run -o cloud get.http.test.js"
 
 import http from "k6/http";
 import { check, sleep } from "k6";
 
-//GET REQUESTS ACTIVE USERS HOMEPAGE
+//1 RPS
 export let options = {
   vus: 1,
   duration: "30s",
@@ -18,6 +18,47 @@ export let options = {
     },
   },
 };
+
+//10 RPS
+// export let options = {
+//   vus: 10,
+//   duration: "30s",
+//   ext: {
+//     loadimpact: {
+//       projectID: 3622560,
+//       // Test runs with the same name groups test runs together
+//       name: "Get Messages",
+//     },
+//   },
+// };
+
+//100 RPS
+// export let options = {
+//   vus: 100,
+//   duration: "30s",
+//   ext: {
+//     loadimpact: {
+//       projectID: 3622560,
+//       // Test runs with the same name groups test runs together
+//       name: "Get Messages",
+//     },
+//   },
+// };
+
+//1000 RPS
+// export let options = {
+//   vus: 1000,
+//   duration: "30s",
+//   ext: {
+//     loadimpact: {
+//       projectID: 3622560,
+//       // Test runs with the same name groups test runs together
+//       name: "Get Messages",
+//     },
+//   },
+// };
+
+// ----------------------------------------------------------------------- //
 
 //GET LAST 100 MESSAGES REQUESTS LOAD
 export default function () {

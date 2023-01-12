@@ -6,19 +6,61 @@
 import http from "k6/http";
 import { check } from "k6";
 
+//1 RPS
+// export let options = {
+//   vus: 1,
+//   duration: "30s",
+//   ext: {
+//     loadimpact: {
+//       projectID: 3622560,
+//       // Test runs with the same name groups test runs together
+//       name: "Get Messages",
+//     },
+//   },
+// };
+
+//10 RPS
+// export let options = {
+//   vus: 10,
+//   duration: "30s",
+//   ext: {
+//     loadimpact: {
+//       projectID: 3622560,
+//       // Test runs with the same name groups test runs together
+//       name: "Get Messages",
+//     },
+//   },
+// };
+
+//100 RPS
+// export let options = {
+//   vus: 100,
+//   duration: "30s",
+//   ext: {
+//     loadimpact: {
+//       projectID: 3622560,
+//       // Test runs with the same name groups test runs together
+//       name: "Get Messages",
+//     },
+//   },
+// };
+
+//1000 RPS
 export let options = {
-  vus: 50,
+  vus: 1000,
   duration: "30s",
   ext: {
     loadimpact: {
       projectID: 3622560,
       // Test runs with the same name groups test runs together
-      name: "Post Message",
+      name: "Get Messages",
     },
   },
 };
 
-// POST REQUESTS LOAD
+// ----------------------------------------------------------------------- //
+
+// POST MESSAGE REQUEST LOAD
 export default function () {
   const url = "http://localhost:3003/addMessage";
   const payload = JSON.stringify({
