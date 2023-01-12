@@ -10,6 +10,7 @@ services:
       - POSTGRES_PASSWORD=pass 
       - POSTGRES_DB=my_db
     volumes:
+      - ./server/messageSeed.csv:/var/lib/postgresql/csvs/messageSeed.csv
       - pgdatasource:/var/lib/postgresql/data
       - ./server/migration.sql:/docker-entrypoint-initdb.d/migration.sql
       - ./server/seed.sql:/docker-entrypoint-initdb.d/seed.sql
