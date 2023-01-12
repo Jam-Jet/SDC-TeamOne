@@ -11,7 +11,7 @@ CREATE TABLE messages(
     message_id serial,
     PRIMARY KEY(message_id),
     message text,
-    send_date timestamp,
+    send_date timestamp default CURRENT_DATE+CURRENT_TIME,
     username varchar
 );
 
