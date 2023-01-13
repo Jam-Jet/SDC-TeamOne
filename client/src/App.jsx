@@ -1,10 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
-import NavBar from "./components/live-chat-page/Navbar";
+import React, { useState, useEffect } from "react";
 import LiveChatPage from "./components/live-chat-page/LiveChatPage";
-import UsernameModal from "./components/live-chat-page/UsernameModal";
 import Login from "./components/log-in-page/Login";
-import NavBarLogin from "./components/log-in-page/NavbarLogin";
-//import { Routes, Route } from "react-router-dom";
 
 function App() {
   const [continueAsGuest, setContinueAsGuest] = useState(false);
@@ -45,24 +41,12 @@ function App() {
       .then(setNewUser(false));
   }, [newUser]);
 
-  //Disable spam bot for now
-  // setTimeout(() => {
-  //   fetch("http://localhost:3003/messages")
-  //     .then((res) => res.json())
-  //     .then((data) => setChatData(data));
-  // }, 500);
-
-  //Temporary useEffect
+  //Preloads initial chat data
   useEffect(() => {
-    fetch("http://localhost:3003/last100messages")
+    fetch("http://localhost:3003/last50messages")
       .then((res) => res.json())
       .then((data) => setChatData(data));
   }, []);
-
-  // console.log("chatData: ", chatData);
-  //console.log("currentUserData: ", currentUserData);
-  // console.log("currentUserData.user_id:", currentUserData.user_id);
-  //console.log("currentMessage: ", currentMessage);
 
   return (
     <appContext.Provider value={{ ...contextData }}>

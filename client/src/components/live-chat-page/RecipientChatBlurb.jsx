@@ -1,5 +1,3 @@
-import { propTypes } from "react-bootstrap/esm/Image";
-
 const RecipientChatBlurb = (props) => {
   return (
     <div id="recipient-chat-blurb-wrapper">

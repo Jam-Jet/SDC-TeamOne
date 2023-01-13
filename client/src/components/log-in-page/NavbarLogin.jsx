@@ -1,7 +1,6 @@
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 
-
 function NavBarLogin() {
   return (
     <Navbar id="main-nav">
@@ -14,7 +13,6 @@ function NavBarLogin() {
         <Navbar.Brand id="nav-title" href="#home">
           CHAT APP
         </Navbar.Brand>
-        
       </Container>
     </Navbar>
   );

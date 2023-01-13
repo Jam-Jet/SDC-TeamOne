@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import UsernameModal from "./UsernameModal";
 import NavBar from "./Navbar";
 import { appContext } from "../../App";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef } from "react";
 
 const LiveChatPage = () => {
   const {
@@ -15,30 +15,9 @@ const LiveChatPage = () => {
     currentUserData,
   } = useContext(appContext);
 
-  const [count, setCount] = useState(1);
-  const [randomMessageData, setRandomMessageData] = useState();
   const ws = useRef();
   const scrollTarget = useRef();
   const currentTime = new Date();
-
-  // let min = 500;
-  // let max = 5000;
-  // let randomInterval = Math.floor(Math.random() * (max - min) + min);
-  // console.log(randomInterval);
-
-  // useEffect(() => {
-  //   console.log("count: ", count);
-  //   setCount((_count) => {
-  //     _count += 1;
-  //   });
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log("count: ", count);
-  //   setCount((_count) => {
-  //     _count++;
-  //   });
-  // }, [count]);
 
   const recordMessage = (e) => {
     setCurrentMessage(e.target.value);
@@ -51,32 +30,30 @@ const LiveChatPage = () => {
         send_date: currentTime,
         username: currentUserData.username,
       };
-
       ws.current.send(JSON.stringify(postObj));
       setCurrentMessage("");
       document.getElementById("chat-input").value = "";
     }
   };
 
+  //Initialized websocket connection on load
   useEffect(() => {
     ws.current = new WebSocket("ws://localhost:3003");
-
     ws.current.onopen = () => {
       console.log("WS connection opened!");
       setConnectionOpen(true);
     };
-
     ws.current.onmessage = (event) => {
       const data = JSON.parse(event.data);
       setChatData((_messages) => [..._messages, data]);
     };
-
     return () => {
       console.log("Cleaning up...");
       ws.current.close();
     };
   }, []);
 
+  //Auto-scrolls to bottom of chat when sending or receiving messages
   useEffect(() => {
     scrollTarget.current.scrollIntoView({ behavior: "smooth" });
   }, [chatData.length]);
@@ -94,42 +71,28 @@ const LiveChatPage = () => {
         <div id="chat-wrapper">
           <div id="chat-content">
             {chatData.map((message, i, arr) => {
-              if (i >= arr.length - 100) {
-                if (message.username === currentUserData.username) {
-                  return (
-                    <UserChatBlurb
-                      message={message.message}
-                      send_date={message.send_date}
-                      username={message.username}
-                    />
-                  );
-                } else {
+              if (message.username === currentUserData.username) {
+                return (
+                  <UserChatBlurb
+                    message={message.message}
+                    send_date={message.send_date}
+                    username={message.username}
+                  />
+                );
+              } else {
+                {
                   {
-                    {
-                      return (
-                        <RecipientChatBlurb
-                          message={message.message}
-                          send_date={message.send_date}
-                          username={message.username}
-                        />
-                      );
-                    }
+                    return (
+                      <RecipientChatBlurb
+                        message={message.message}
+                        send_date={message.send_date}
+                        username={message.username}
+                      />
+                    );
                   }
                 }
               }
             })}
-            {/* {
-              (useEffect(() => {
-                return (
-                  <RecipientChatBlurb
-                    message={randomMessageData.message}
-                    send_date={randomMessageData.send_date}
-                    username={randomMessageData.username}
-                  />
-                );
-              }),
-              [randomMessageData])
-            } */}
             <div ref={scrollTarget}></div>
           </div>
           <div id="input-and-btn-wrapper">

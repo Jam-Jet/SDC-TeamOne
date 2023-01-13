@@ -10,7 +10,6 @@ const UsernameModal = () => {
     setCurrentUserData,
     currentUserData,
     setNewUser,
-    userList,
   } = useContext(appContext);
 
   const handleHide = () => {

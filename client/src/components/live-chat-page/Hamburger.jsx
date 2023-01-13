@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Modal, Container, Row, Col } from "react-bootstrap";
+import { Button, Modal, Container, Col } from "react-bootstrap";
 
 function MenuModal() {
   const [show, setShow] = useState(false);
@@ -25,26 +25,17 @@ function MenuModal() {
           />
         </svg>
       </Button>
-      <Modal
-        id="modal-main"
-        show={show}
-        onHide={() => setShow(false)}
-      >
+      <Modal id="modal-main" show={show} onHide={() => setShow(false)}>
         <Modal.Header closeButton closeVariant="black" id="modal-header">
           Settings
         </Modal.Header>
         <Modal.Body id="modal-body">
           <Container id="ham-list">
-            {/* <Row> */}
             <Col>Profile</Col>
             <Col>New Chat</Col>
             <Col>Messages</Col>
-            {/* </Row>
-              <Row> */}
             <Col>Find Friends</Col>
             <Col>Log Out</Col>
-            {/* <Col>List 6</Col> */}
-            {/* </Row> */}
           </Container>
         </Modal.Body>
       </Modal>
