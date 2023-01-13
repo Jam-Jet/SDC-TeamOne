@@ -1,38 +1,21 @@
-// sudo npm install -g loadtest
 const express = require("express");
 const cors = require("cors");
-const { Pool } = require("pg");
-const cluster = require("cluster");
 const os = require("os");
-
-const numCpu = os.cpus().length;
-console.log("num of cpus: ", numCpu);
+const cluster = require("cluster");
+const { Pool } = require("pg");
 
 const config = require("./config")[process.env.NODE_ENV || "dev"];
-const PORT = config.port;
+const numCpu = os.cpus().length;
 
+const app = express();
+const PORT = config.port;
 const pool = new Pool({
   connectionString: config.connectionString,
 });
-pool.connect();
 
-const app = express();
 app.use(cors());
 app.use(express.json());
-
-//CLUSTER SETUP
-if (cluster.isMaster) {
-  for (let i = 0; i < numCpu; i++) {
-    cluster.fork();
-    console.log(`forked ${i}`);
-  }
-} else {
-  app.listen(PORT, () =>
-    console.log(
-      `Our app is running on port: ${PORT}.... 🚀 server process: ${process.pid} @ http://localhost:3003`
-    )
-  );
-}
+pool.connect();
 
 app.get("/", (req, res) => {
   res.send(`Hello World!... assigned to worker ${process.pid}`);
@@ -108,3 +91,17 @@ app.post("/addMessage", (req, res) => {
       res.status(400).send(`Error: ${err}`);
     });
 });
+
+//CLUSTER SETUP & PORT LISTENING
+if (cluster.isMaster) {
+  for (let i = 0; i < numCpu; i++) {
+    cluster.fork();
+    console.log(`forked ${i}`);
+  }
+} else {
+  app.listen(PORT, () =>
+    console.log(
+      `Our app is running on port: ${PORT}.... 🚀 server process: ${process.pid} @ http://localhost:3003`
+    )
+  );
+}

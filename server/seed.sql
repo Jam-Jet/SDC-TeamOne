@@ -1,7 +1,6 @@
 INSERT INTO users(name) VALUES ('David');
 
 INSERT INTO messages(message, send_date, username) VALUES ('Hello, how are you?', '2022-12-12 16:04', 'David');
--- INSERT INTO messages(message, send_date, user_id) VALUES ('Hello, how are you?', '2022-12-12',1);
 
 INSERT INTO users(name) VALUES ('Shaun');
 INSERT INTO users(name) VALUES ('Amalie');
@@ -1004,6 +1003,7 @@ INSERT INTO users(name) VALUES ('Adler');
 INSERT INTO users(name) VALUES ('Jelene');
 INSERT INTO users(name) VALUES ('Kristoforo');
 
+-- Imports & Seeds data from messageSeed.csv
 COPY messages(message, username)
 FROM
   '/var/lib/postgresql/csvs/messageSeed.csv' DELIMITER ',' CSV;

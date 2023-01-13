@@ -4,20 +4,12 @@ import Button from "react-bootstrap/Button";
 import UsernameModal from "./UsernameModal";
 import NavBar from "./Navbar";
 import { appContext } from "../../App";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef } from "react";
 
 const LiveChatPage = () => {
-  const {
-    setCurrentMessage,
-    currentMessage,
-    chatData,
-    setChatData,
-    currentUserData,
-  } = useContext(appContext);
+  const { setCurrentMessage, currentMessage, chatData, currentUserData } =
+    useContext(appContext);
 
-  const [count, setCount] = useState(1);
-  const [randomMessageData, setRandomMessageData] = useState();
-  const ws = useRef();
   const scrollTarget = useRef();
   const currentTime = new Date();
 
@@ -32,31 +24,18 @@ const LiveChatPage = () => {
         send_date: currentTime,
         username: currentUserData.username,
       };
-
-      ws.current.send(JSON.stringify(postObj));
-      setCurrentMessage("");
-      document.getElementById("chat-input").value = "";
+      fetch("http://localhost:3003/addMessage", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postObj),
+      })
+        .then(console.log(`message sent: ${currentMessage}`))
+        .then(setCurrentMessage(""))
+        .then((document.getElementById("chat-input").value = ""));
     }
   };
-
-  useEffect(() => {
-    ws.current = new WebSocket("ws://localhost:3003");
-
-    ws.current.onopen = () => {
-      console.log("WS connection opened!");
-      setConnectionOpen(true);
-    };
-
-    ws.current.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      setChatData((_messages) => [..._messages, data]);
-    };
-
-    return () => {
-      console.log("Cleaning up...");
-      ws.current.close();
-    };
-  }, []);
 
   useEffect(() => {
     scrollTarget.current.scrollIntoView({ behavior: "smooth" });
@@ -74,43 +53,29 @@ const LiveChatPage = () => {
         </div>
         <div id="chat-wrapper">
           <div id="chat-content">
-            {chatData.map((message, i, arr) => {
-              if (i >= arr.length - 100) {
-                if (message.username === currentUserData.username) {
-                  return (
-                    <UserChatBlurb
-                      message={message.message}
-                      send_date={message.send_date}
-                      username={message.username}
-                    />
-                  );
-                } else {
+            {chatData.map((message) => {
+              if (message.username === currentUserData.username) {
+                return (
+                  <UserChatBlurb
+                    message={message.message}
+                    send_date={message.send_date}
+                    username={message.username}
+                  />
+                );
+              } else {
+                {
                   {
-                    {
-                      return (
-                        <RecipientChatBlurb
-                          message={message.message}
-                          send_date={message.send_date}
-                          username={message.username}
-                        />
-                      );
-                    }
+                    return (
+                      <RecipientChatBlurb
+                        message={message.message}
+                        send_date={message.send_date}
+                        username={message.username}
+                      />
+                    );
                   }
                 }
               }
             })}
-            {/* {
-              (useEffect(() => {
-                return (
-                  <RecipientChatBlurb
-                    message={randomMessageData.message}
-                    send_date={randomMessageData.send_date}
-                    username={randomMessageData.username}
-                  />
-                );
-              }),
-              [randomMessageData])
-            } */}
             <div ref={scrollTarget}></div>
           </div>
           <div id="input-and-btn-wrapper">
