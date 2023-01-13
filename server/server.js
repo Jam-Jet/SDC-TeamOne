@@ -1,32 +1,23 @@
 // sudo npm install -g loadtest
-
 const express = require("express");
 const cors = require("cors");
+const { Pool } = require("pg");
 const cluster = require("cluster");
 const os = require("os");
-const WebSocket = require("ws");
-const { Pool } = require("pg");
-let server;
 
 const numCpu = os.cpus().length;
 console.log("num of cpus: ", numCpu);
 
 const config = require("./config")[process.env.NODE_ENV || "dev"];
-//console.log("config", config);
 const PORT = config.port;
 
-//Setting up database connection
 const pool = new Pool({
   connectionString: config.connectionString,
 });
-
 pool.connect();
 
 const app = express();
-const wsapp = express();
-//Allows cross origin requests
 app.use(cors());
-//Allows json in body
 app.use(express.json());
 
 //CLUSTER SETUP
@@ -35,18 +26,8 @@ if (cluster.isMaster) {
     cluster.fork();
     console.log(`forked ${i}`);
   }
-  let numOfWorkers = numCpu;
-  cluster.on("exit", (worker, code, signal) => {
-    numOfWorkers--;
-    console.log(
-      `worker ${worker.process.pid} died... ${numOfWorkers} workers left`
-    );
-    cluster.fork();
-    numOfWorkers++;
-    console.log(`new worker created!... now ${numOfWorkers} workers left`);
-  });
 } else {
-  server = app.listen(PORT, () =>
+  app.listen(PORT, () =>
     console.log(
       `Our app is running on port: ${PORT}.... 🚀 server process: ${process.pid} @ http://localhost:3003`
     )
@@ -55,7 +36,6 @@ if (cluster.isMaster) {
 
 app.get("/", (req, res) => {
   res.send(`Hello World!... assigned to worker ${process.pid}`);
-  // cluster.worker.kill();
 });
 
 app.get("/users", (req, res) => {
@@ -70,27 +50,16 @@ app.get("/users", (req, res) => {
     });
 });
 
-// app.get("/messages", (req, res) => {
-//   pool
-//     .query("SELECT * FROM messages")
-//     .then((result) => {
-//       res.status(200).send(result.rows);
-//     })
-//     .catch((err) => {
-//       res.status(400).send("cannot get messages");
-//     });
-// });
-
 app.get("/last100messages", (req, res) => {
   pool
     .query(
       `SELECT * FROM (SELECT * FROM messages ORDER BY message_id DESC limit 100) subquery ORDER BY message_id ASC`
     )
     .then((result) => {
+      console.log(`/last100Messages request assigned to worker ${process.pid}`);
       res.status(200).send(result.rows);
     })
     .catch((err) => {
-      console.log(`/last100Messages request assigned to worker ${process.pid}`);
       res.status(400).send("cannot get messages");
     });
 });
@@ -139,107 +108,3 @@ app.post("/addMessage", (req, res) => {
       res.status(400).send(`Error: ${err}`);
     });
 });
-
-// const wsserver = wsapp.listen(3002, () => {
-//   console.log(
-//     `Our app is running on port: 3002.... 🚀 server ${process.pid} @ http://localhost:3003`
-//   );
-// });
-
-// const server = () => {
-//   if (cluster.isMaster) {
-//     for (let i = 0; i < numCpu; i++) {
-//       cluster.fork();
-//       console.log(`forked ${i}`);
-//     }
-//     let numOfWorkers = numCpu;
-//     cluster.on("exit", (worker, code, signal) => {
-//       numOfWorkers--;
-//       console.log(
-//         `worker ${worker.process.pid} died... ${numOfWorkers} workers left`
-//       );
-//       cluster.fork();
-//       numOfWorkers++;
-//       console.log(`new worker created!... now ${numOfWorkers} workers left`);
-//     });
-//   } else {
-//     app.listen(PORT, () =>
-//       console.log(
-//         `Our app is running on port: ${PORT}.... 🚀 server process: ${process.pid} @ http://localhost:3003`
-//       )
-//     );
-//   }
-// };
-
-// const server = app.listen(PORT, () => {
-//   console.log(
-//     `Our app is running on port: ${PORT}.... 🚀 server ${process.pid} @ http://localhost:3003`
-//   );
-// });
-
-// //Websocket
-// const wss = new WebSocket.Server({ server });
-
-// //Stores connect users
-// const users = new Set();
-
-// //Function to send ws message to all users
-// function sendMessage(message) {
-//   users.forEach((user) => {
-//     user.ws.send(JSON.stringify(message));
-//   });
-// }
-
-// //websocket
-// wss.on("connection", (ws) => {
-//   const userRef = {
-//     ws,
-//   };
-//   users.add(userRef);
-
-//   ws.on("message", (message) => {
-//     try {
-//       //Parses incoming message
-//       const data = JSON.parse(message);
-
-//       //Builds message object
-//       const messageToSend = {
-//         username: data.username,
-//         message: data.message,
-//         send_date: new Date(),
-//       };
-
-//       /*
-//         Need to store messages in database here
-//       */
-
-//       let queryString =
-//         "INSERT INTO messages(message, send_date, username) VALUES ($1, $2, $3)";
-//       pool
-//         .query(queryString, [
-//           messageToSend.message,
-//           messageToSend.send_date,
-//           messageToSend.username,
-//         ])
-//         .then((result) => {
-//           console.log("Message stored in database");
-//           console.log(result);
-//           // console.log(messageToSend.send_date - Date.now());
-//           console.log(messageToSend);
-//         })
-//         .catch((err) => {
-//           console.log("Failed", err);
-//         });
-
-//       //Send to all users
-//       sendMessage(messageToSend);
-//     } catch (e) {
-//       console.error("Error passing message!", e);
-//     }
-//   });
-
-//   ws.on("close", (code, reason) => {
-//     users.delete(userRef);
-//     console.log(`Connection closed: ${code} ${reason}!`);
-//   });
-// });

@@ -21,25 +21,6 @@ const LiveChatPage = () => {
   const scrollTarget = useRef();
   const currentTime = new Date();
 
-  // let min = 500;
-  // let max = 5000;
-  // let randomInterval = Math.floor(Math.random() * (max - min) + min);
-  // console.log(randomInterval);
-
-  // useEffect(() => {
-  //   console.log("count: ", count);
-  //   setCount((_count) => {
-  //     _count += 1;
-  //   });
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log("count: ", count);
-  //   setCount((_count) => {
-  //     _count++;
-  //   });
-  // }, [count]);
-
   const recordMessage = (e) => {
     setCurrentMessage(e.target.value);
   };

@@ -46,11 +46,11 @@ function App() {
   }, [newUser]);
 
   //Disable spam bot for now
-  // setTimeout(() => {
-  //   fetch("http://localhost:3003/messages")
-  //     .then((res) => res.json())
-  //     .then((data) => setChatData(data));
-  // }, 500);
+  setTimeout(() => {
+    fetch("http://localhost:3003/messages")
+      .then((res) => res.json())
+      .then((data) => setChatData(data));
+  }, 500);
 
   //Temporary useEffect
   useEffect(() => {
