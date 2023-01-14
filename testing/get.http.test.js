@@ -6,9 +6,11 @@
 import http from "k6/http";
 import { check, sleep } from "k6";
 
-//1 RPS
 export let options = {
-  vus: 1,
+  // vus: 1,
+  // vus: 10,
+  // vus: 100,
+  vus: 1000,
   duration: "30s",
   ext: {
     loadimpact: {
@@ -18,45 +20,6 @@ export let options = {
     },
   },
 };
-
-//10 RPS
-// export let options = {
-//   vus: 10,
-//   duration: "30s",
-//   ext: {
-//     loadimpact: {
-//       projectID: 3622560,
-//       // Test runs with the same name groups test runs together
-//       name: "Get Messages",
-//     },
-//   },
-// };
-
-//100 RPS
-// export let options = {
-//   vus: 100,
-//   duration: "30s",
-//   ext: {
-//     loadimpact: {
-//       projectID: 3622560,
-//       // Test runs with the same name groups test runs together
-//       name: "Get Messages",
-//     },
-//   },
-// };
-
-//1000 RPS
-// export let options = {
-//   vus: 1000,
-//   duration: "30s",
-//   ext: {
-//     loadimpact: {
-//       projectID: 3622560,
-//       // Test runs with the same name groups test runs together
-//       name: "Get Messages",
-//     },
-//   },
-// };
 
 // ----------------------------------------------------------------------- //
 
