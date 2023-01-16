@@ -107,6 +107,18 @@
 
 ## FINAL TEST METRICS - OPTIMIZED WEBSOCKET VERSION
 
+![Imgur](https://i.imgur.com/Y66Gpa7.png)
+
+#
+
+![Imgur](https://i.imgur.com/GYIUs0H.png)
+
+#
+
+![Imgur](https://i.imgur.com/KnHaOxc.png)
+
+#
+
 ## Libraries & Utilities Documentation
 
 - [React](https://reactjs.org/) x [Vite](https://vitejs.dev/)
