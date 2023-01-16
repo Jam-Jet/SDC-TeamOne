@@ -102,12 +102,22 @@
   ![Imgur](https://i.imgur.com/4jinP5H.png)
 - Next, click "**Continue as Guest**" (login/sign-up still in development)
   ![Imgur](https://i.imgur.com/q8icJXG.gif)
-- You should now see the following screen with a prompt to enter your guest username:
-  ![Imgur](https://i.imgur.com/CEvUkJX.png)
 - Enter your guest name then press enter or click continue to begin chatting!
   ![Giphy](https://i.imgur.com/euM0z1w.gif)
 
 ## FINAL TEST METRICS - UNOPTIMIZED VERSION 1
+
+![Imgur](https://i.imgur.com/DbrLFi8.png)
+
+#
+
+![Imgur](https://i.imgur.com/GYIUs0H.png)
+
+#
+
+![Imgur](https://i.imgur.com/KnHaOxc.png)
+
+#
 
 ## Libraries & Utilities Documentation
 
