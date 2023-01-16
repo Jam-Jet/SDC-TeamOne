@@ -107,6 +107,22 @@
 
 ## FINAL TEST METRICS - OPTIMIZED NODE CLUSTER VERSION
 
+![Imgur](https://i.imgur.com/4ImSKKO.png)
+
+#
+
+![Imgur](https://i.imgur.com/MXWBWNZ.png)
+
+#
+
+![Imgur](https://i.imgur.com/GYIUs0H.png)
+
+#
+
+![Imgur](https://i.imgur.com/KnHaOxc.png)
+
+#
+
 ## Libraries & Utilities Documentation
 
 - [React](https://reactjs.org/) x [Vite](https://vitejs.dev/)
