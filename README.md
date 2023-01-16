@@ -102,8 +102,6 @@
   ![Imgur](https://i.imgur.com/4jinP5H.png)
 - Next, click "**Continue as Guest**" (login/sign-up still in development)
   ![Imgur](https://i.imgur.com/q8icJXG.gif)
-- You should now see the following screen with a prompt to enter your guest username:
-  ![Imgur](https://i.imgur.com/CEvUkJX.png)
 - Enter your guest name then press enter or click continue to begin chatting!
   ![Giphy](https://i.imgur.com/euM0z1w.gif)
 
