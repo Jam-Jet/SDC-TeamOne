@@ -1,3 +1,7 @@
+# --- **OPTIMIZED WEBSOCKET BRANCH** ---
+
+#
+
 ## --------------- _Galvanize MCSP-16 Team 1_ ---------------
 
 # System Design Capstone Project : Chat App
@@ -22,7 +26,6 @@
 ![Prettier](https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E)
 
 ![Discord](https://camo.githubusercontent.com/f868f43f3c084669121e55e633ca5c3e11d382872ab7db663789f5c736c71a43/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f446973636f72642d3538363546323f7374796c653d666f722d7468652d6261646765266c6f676f3d646973636f7264266c6f676f436f6c6f723d7768697465)
-![Trello](https://camo.githubusercontent.com/529f3db66dcea87286a50a8bbb379acc5b6485805215e4cce5365aa43b7ddaca/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5472656c6c6f2d3030353243433f7374796c653d666f722d7468652d6261646765266c6f676f3d7472656c6c6f266c6f676f436f6c6f723d7768697465)
 ![Slack](https://camo.githubusercontent.com/870d2945e15dde83583f64ea1f3f4471702e45bf30fa884412da74cb7731ae42/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f536c61636b2d3441313534423f7374796c653d666f722d7468652d6261646765266c6f676f3d736c61636b266c6f676f436f6c6f723d7768697465)
 ![Zoom](https://camo.githubusercontent.com/c6c90c4d74d5fad08da3e2c31c556ea8a8b45a6bd5756b6e49111d9825cde56f/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5a6f6f6d2d3244384346463f7374796c653d666f722d7468652d6261646765266c6f676f3d7a6f6f6d266c6f676f436f6c6f723d7768697465)
 ![Tableau](https://img.shields.io/badge/Tableau-E97627?style=for-the-badge&logo=Tableau&logoColor=white)
@@ -31,11 +34,12 @@
 
 - Build a Full Stack application that focuses primarily on backend functionality
 - Write a data generation script that can produce a minimum of 10M records and efficiently load this data into your service's DBMS.
-- Use your simulated dataset of 10M records for ALL subsequent testing.
+- Use your simulated dataset of 10M records for ALL subsequent load testing @ 1, 10, 100, and 1000 requests per sec
 - Test your application using a dependency of your choice: Team Choice ==> K6
-- All queries should average a response times less than 50ms
+- All queries should average response times of less than 50ms
 - Annotate test metrics and document how optimizations were implemented in an Engineering Journal
 - Application should support all functionally necessary CRUD operations
+- Employ Docker / Docker-Compose to containerize your application
 
 ## Table of Contents
 
@@ -45,16 +49,16 @@
 ## Installation & Setup
 
 - Fork / clone down this repo... be sure to select the option to enable all branches : [Galvanize MCSP-16 : SDC Team 1 Github Repo](https://github.com/Jam-Jet/SDC-TeamOne)
+- cd into 'server' directory and install backend dependencies
 
 ```bash
-(from 'Galvanize_SDC_TeamOne' directory [root directory])
+(from 'SDC-TEAMONE' directory [root directory])
 
   cd server/
   npm install
 ```
 
-- cd into 'client' directory and install frontend dependencies
-- **Note:** '_--force' tag is needed to install all frontend dependencies for this project_
+- **(Optional) Required for local non-dockerized deplyment:** cd into 'client' directory and install frontend dependencies _(done automatically in docker-compose.yaml file in dockerized deployment)_
 
 ```bash
 (from 'server' directory)
@@ -64,40 +68,44 @@
 ```
 
 - **NOTE:** If you are using either the "optimized-websocket" or "optimized-node-cluster" branches, from the server directory, run generator.js to create a messageSeed.csv file with 10M data records.
-- If you are using the "version-1" branch, you may skip this step, as the first version employs a readily available "seed.sql" file with 100,000 data records without need for further setup.
+- If you are using the "unoptimized-version-1" branch, you may skip this step, as the unoptimized version employs a readily available "seed.sql" file with 100,000 data records without need for further setup.
 
 ```bash
 *** for "optimized-websocket" & "optimized-node-cluster" branches only ***
-(from root directory ['Galvanize_SDC_TeamOne'])
+(from root directory ['SDC-TEAMONE'])
   cd server/
   node generator.js
 
 ```
 
+- Allow generator.js to finish running... you should see a new file called "messageSeed.csv" in the server directory once complete
 - At this point, if you do not have Docker Desktop installed and configured, go ahead and install Docker Desktop and configure Docker to be imaged with PostgreSQL. View the following documentation for instruction on install/setup: [Docker Documentation](https://docs.docker.com/)
 - Once you have Docker Desktop up and running, execute the following commands from your IDE terminal:
 
 ```bash
-(from root directory ['Galvanize_SDC_TeamOne'])
+(from root directory ['SDC-TEAMONE'])
 
   docker compose up
 
 ```
 
+- Allow docker compose to complete initialization
+
 ## Opening the Chat App from Docker Desktop
 
 - Once complete, you should have a containerized Docker application visible on Docker Desktop called **sdc-teamone**.
+  ![Imgur](https://i.imgur.com/yezyCQj.png)
 - By clicking the dropdown button on "sdc-teamone" on Docker Desktop, you should be able to see the 4 following containers: **database-1**, **api-1**, **pgadmin-1**, and **frontend-1**.
+  ![Imgur](https://i.imgur.com/ywwQcSS.png)
 - Click on **frontend-1**'s port number (**3004:3004**) on Docker Desktop to deploy the application to the browser.
 - You should see the following Log-In screen:
   ![Imgur](https://i.imgur.com/4jinP5H.png)
 - Next, click "**Continue as Guest**" (login/sign-up still in development)
-- You should now see the following screen with a prompt to enter your guest username:
-  ![Imgur](https://i.imgur.com/CEvUkJX.png)
+  ![Imgur](https://i.imgur.com/q8icJXG.gif)
 - Enter your guest name then press enter or click continue to begin chatting!
   ![Giphy](https://i.imgur.com/euM0z1w.gif)
 
-## FINAL TEST METRICS
+## FINAL TEST METRICS - OPTIMIZED WEBSOCKET VERSION
 
 ## Libraries & Utilities Documentation
 
