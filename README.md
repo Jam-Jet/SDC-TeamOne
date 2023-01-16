@@ -1,9 +1,3 @@
-# **-----MAIN BRANCH ::::: README ONLY-----**
-
-- Select either **version-1**, **optimized-websocket**, or **optimized-node-cluster** branch for actual project code.
-
-#
-
 ## --------------- _Galvanize MCSP-16 Team 1_ ---------------
 
 # System Design Capstone Project : Chat App
