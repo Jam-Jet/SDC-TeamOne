@@ -107,6 +107,18 @@
 
 ## FINAL TEST METRICS - UNOPTIMIZED VERSION 1
 
+![Imgur](https://i.imgur.com/DbrLFi8.png)
+
+#
+
+![Imgur](https://i.imgur.com/GYIUs0H.png)
+
+#
+
+![Imgur](https://i.imgur.com/KnHaOxc.png)
+
+#
+
 ## Libraries & Utilities Documentation
 
 - [React](https://reactjs.org/) x [Vite](https://vitejs.dev/)
