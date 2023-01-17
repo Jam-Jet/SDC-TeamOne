@@ -107,7 +107,7 @@
 
 ## FINAL TEST METRICS - OPTIMIZED NODE CLUSTER VERSION
 
-![Imgur](https://i.imgur.com/4ImSKKO.png)
+![Imgur](https://i.imgur.com/9wHn1e4.png)
 
 #
 
